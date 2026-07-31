@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>MICELAND</title>
+
+<!-- Fuentes -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Nuestro estilo -->
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+<!-- ============================================
+     PANTALLA 1: BIENVENIDA (splash)
+          Se ve primero. Tiene 2 botones que abren
+               el formulario de login o de registro.
+               ============================================= -->
+               <div class="pantalla visible" id="pantalla-bienvenida">
+                 <div class="bienvenida">
+                     <div class="marca">MICE<span>LAND</span></div>
+                         <p class="frase">Todo lo que buscás, a un precio que te va a encantar</p>
+
+                             <button class="boton boton-lleno" onclick="mostrarFormulario('login')">
+                                   Iniciar sesión
+                                       </button>
+                                           <button class="boton boton-borde" onclick="mostrarFormulario('registro')">
+                                                 Crear cuenta
+                                                     </button>
+                                                       </div>
+                                                       </div>
+
+                                                       <!-- ============================================
+                                                            PANTALLA 2: FORMULARIO (login o registro)
+                                                                 Es el mismo formulario para las dos cosas,
+                                                                      solo cambia el título y si muestra o no
+                                                                           los campos extra (nombre, teléfono).
+                                                                           ============================================= -->
+                                                                           <div class="pantalla" id="pantalla-formulario">
+                                                                             <div class="tarjeta-formulario">
+
+                                                                                 <button class="boton-volver" onclick="volverABienvenida()">← Volver</button>
+
+                                                                                     <h1 id="titulo-formulario">Iniciar sesión</h1>
+
+                                                                                         <!-- Acá aparece un mensaje si algo sale mal -->
+                                                                                             <div class="mensaje-error" id="mensaje-error"></div>
+
+                                                                                                 <!-- Estos 2 campos solo se ven en modo "registro" -->
+                                                                                                     <div class="campo" id="campo-nombre" style="display:none;">
+                                                                                                           <label>Nombre completo</label>
+                                                                                                                 <input type="text" id="input-nombre" placeholder="Tu nombre y apellido">
+                                                                                                                     </div>
+                                                                                                                         <div class="campo" id="campo-telefono" style="display:none;">
+                                                                                                                               <label>Teléfono</label>
+                                                                                                                                     <input type="tel" id="input-telefono" placeholder="Ej: 099123456">
+                                                                                                                                         </div>
+
+                                                                                                                                             <div class="campo">
+                                                                                                                                                   <label>Correo electrónico</label>
+                                                                                                                                                         <input type="email" id="input-email" placeholder="tucorreo@ejemplo.com">
+                                                                                                                                                             </div>
+                                                                                                                                                                 <div class="campo">
+                                                                                                                                                                       <label>Contraseña</label>
+                                                                                                                                                                             <input type="password" id="input-password" placeholder="Mínimo 6 caracteres">
+                                                                                                                                                                                 </div>
+
+                                                                                                                                                                                     <button class="boton boton-lleno" id="boton-enviar" onclick="enviarFormulario()">
+                                                                                                                                                                                           Iniciar sesión
+                                                                                                                                                                                               </button>
+
+                                                                                                                                                                                                   <p class="texto-alterno" id="texto-alterno">
+                                                                                                                                                                                                         ¿No tenés cuenta? <b onclick="cambiarModo()">Registrate</b>
+                                                                                                                                                                                                             </p>
+                                                                                                                                                                                                               </div>
+                                                                                                                                                                                                               </div>
+
+                                                                                                                                                                                                               <!-- ============================================
+                                                                                                                                                                                                                    PANTALLA 3: SESIÓN INICIADA (temporal)
+                                                                                                                                                                                                                         Por ahora solo confirma que el login
+                                                                                                                                                                                                                              funcionó. En la Fase 2 esto se reemplaza
+                                                                                                                                                                                                                                   por el catálogo real.
+                                                                                                                                                                                                                                   ============================================= -->
+                                                                                                                                                                                                                                   <div class="pantalla" id="pantalla-bienvenido-usuario">
+                                                                                                                                                                                                                                     <div class="bienvenida">
+                                                                                                                                                                                                                                         <div class="marca">MICE<span>LAND</span></div>
+                                                                                                                                                                                                                                             <p class="frase" id="texto-usuario-logueado">¡Hola!</p>
+                                                                                                                                                                                                                                                 <button class="boton boton-borde" onclick="cerrarSesionUsuario()">Cerrar sesión</button>
+                                                                                                                                                                                                                                                   </div>
+                                                                                                                                                                                                                                                   </div>
+
+                                                                                                                                                                                                                                                   <!-- ============================================
+                                                                                                                                                                                                                                                        Cargamos primero Firebase, después nuestra
+                                                                                                                                                                                                                                                             configuración, y al final la lógica.
+                                                                                                                                                                                                                                                             ============================================= -->
+                                                                                                                                                                                                                                                             <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+                                                                                                                                                                                                                                                             <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+                                                                                                                                                                                                                                                             <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+                                                                                                                                                                                                                                                             <script src="js/firebase-config.js"></script>
+                                                                                                                                                                                                                                                             <script src="js/auth.js"></script>
+
+                                                                                                                                                                                                                                                             </body>
+                                                                                                                                                                                                                                                             </html>
+                                                                                                                                                                                                                                                             

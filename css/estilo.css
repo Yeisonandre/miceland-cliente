@@ -1,0 +1,152 @@
+/* =========================================================
+   COLORES Y VALORES DE MARCA
+      Si en algún momento querés cambiar un color de toda la
+         app, lo cambiás acá una sola vez y se actualiza en todos
+            lados. Esto se llama "variables CSS".
+            ========================================================= */
+            :root{
+              --morado: #4B2E83;
+                --morado-oscuro: #33205C;
+                  --coral: #FF3B69;
+                    --amarillo: #FFC93C;
+                      --crema: #FAF7F5;
+                        --texto: #1A1523;
+                          --texto-suave: #7A7284;
+                            --linea: #ECE6F0;
+                            }
+
+                            /* Reseteo básico: saca los márgenes raros que traen los
+                               navegadores por defecto */
+                               *{ box-sizing:border-box; }
+                               body{ margin:0; padding:0; background:var(--crema); }
+                               body, input, button{ font-family:'Inter', sans-serif; color:var(--texto); }
+                               h1, .marca{ font-family:'Baloo 2', sans-serif; }
+                               button{ cursor:pointer; }
+
+                               /* =========================================================
+                                  SISTEMA DE PANTALLAS
+                                     Todas las pantallas existen en el HTML al mismo tiempo,
+                                        pero solo se ve la que tiene la clase "visible".
+                                           El JS se encarga de sacar y poner esa clase.
+                                           ========================================================= */
+                                           .pantalla{ display:none; }
+                                           .pantalla.visible{ display:block; }
+
+                                           /* =========================================================
+                                              PANTALLA DE BIENVENIDA
+                                              ========================================================= */
+                                              .bienvenida{
+                                                min-height:100vh;
+                                                  display:flex;
+                                                    flex-direction:column;
+                                                      justify-content:center;
+                                                        align-items:center;
+                                                          background:linear-gradient(160deg, var(--morado) 0%, var(--morado-oscuro) 100%);
+                                                            color:#fff;
+                                                              padding:32px;
+                                                                text-align:center;
+                                                                }
+                                                                .marca{
+                                                                  font-size:36px;
+                                                                    font-weight:800;
+                                                                      margin-bottom:6px;
+                                                                      }
+                                                                      .marca span{ color:var(--amarillo); }
+                                                                      .frase{
+                                                                        color:rgba(255,255,255,0.75);
+                                                                          font-size:13px;
+                                                                            margin-bottom:36px;
+                                                                              max-width:280px;
+                                                                              }
+
+                                                                              /* =========================================================
+                                                                                 BOTONES (reutilizables en toda la app)
+                                                                                 ========================================================= */
+                                                                                 .boton{
+                                                                                   width:100%;
+                                                                                     max-width:340px;
+                                                                                       padding:14px;
+                                                                                         border-radius:999px;
+                                                                                           border:none;
+                                                                                             font-weight:700;
+                                                                                               font-size:15px;
+                                                                                                 margin-bottom:12px;
+                                                                                                 }
+                                                                                                 .boton-lleno{
+                                                                                                   background:var(--coral);
+                                                                                                     color:#fff;
+                                                                                                       box-shadow:0 6px 16px rgba(255,59,105,0.35);
+                                                                                                       }
+                                                                                                       .boton-lleno:disabled{ opacity:0.55; }
+                                                                                                       .boton-borde{
+                                                                                                         background:rgba(255,255,255,0.1);
+                                                                                                           border:1.5px solid rgba(255,255,255,0.3);
+                                                                                                             color:#fff;
+                                                                                                             }
+
+                                                                                                             /* =========================================================
+                                                                                                                PANTALLA DE FORMULARIO (login / registro)
+                                                                                                                ========================================================= */
+                                                                                                                .tarjeta-formulario{
+                                                                                                                  max-width:400px;
+                                                                                                                    margin:0 auto;
+                                                                                                                      padding:24px 20px 40px;
+                                                                                                                      }
+                                                                                                                      .boton-volver{
+                                                                                                                        background:none;
+                                                                                                                          border:none;
+                                                                                                                            color:var(--texto-suave);
+                                                                                                                              font-size:14px;
+                                                                                                                                font-weight:600;
+                                                                                                                                  padding:8px 0;
+                                                                                                                                    margin-bottom:12px;
+                                                                                                                                    }
+                                                                                                                                    .tarjeta-formulario h1{
+                                                                                                                                      font-size:22px;
+                                                                                                                                        margin:0 0 20px;
+                                                                                                                                        }
+                                                                                                                                        .mensaje-error{
+                                                                                                                                          display:none;
+                                                                                                                                            background:#FFE7EC;
+                                                                                                                                              color:#C21F4B;
+                                                                                                                                                font-size:12.5px;
+                                                                                                                                                  font-weight:600;
+                                                                                                                                                    padding:10px 12px;
+                                                                                                                                                      border-radius:10px;
+                                                                                                                                                        margin-bottom:14px;
+                                                                                                                                                        }
+                                                                                                                                                        .mensaje-error.visible{ display:block; }
+
+                                                                                                                                                        .campo{ margin-bottom:14px; }
+                                                                                                                                                        .campo label{
+                                                                                                                                                          display:block;
+                                                                                                                                                            font-size:12.5px;
+                                                                                                                                                              font-weight:700;
+                                                                                                                                                                color:var(--texto-suave);
+                                                                                                                                                                  margin-bottom:6px;
+                                                                                                                                                                  }
+                                                                                                                                                                  .campo input{
+                                                                                                                                                                    width:100%;
+                                                                                                                                                                      padding:12px 14px;
+                                                                                                                                                                        border-radius:10px;
+                                                                                                                                                                          border:1.5px solid var(--linea);
+                                                                                                                                                                            font-size:14px;
+                                                                                                                                                                              outline:none;
+                                                                                                                                                                                background:#fff;
+                                                                                                                                                                                }
+                                                                                                                                                                                .campo input:focus{ border-color:var(--coral); }
+
+                                                                                                                                                                                .tarjeta-formulario .boton{ margin-top:8px; }
+
+                                                                                                                                                                                .texto-alterno{
+                                                                                                                                                                                  text-align:center;
+                                                                                                                                                                                    font-size:13px;
+                                                                                                                                                                                      color:var(--texto-suave);
+                                                                                                                                                                                        margin-top:16px;
+                                                                                                                                                                                        }
+                                                                                                                                                                                        .texto-alterno b{
+                                                                                                                                                                                          color:var(--coral);
+                                                                                                                                                                                            font-weight:700;
+                                                                                                                                                                                              cursor:pointer;
+                                                                                                                                                                                              }
+                                                                                                                                                                                              
