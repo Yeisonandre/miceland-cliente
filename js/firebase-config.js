@@ -9,13 +9,9 @@
               projectId: "miceland-d7bed",
                 storageBucket: "miceland-d7bed.firebasestorage.app",
                   messagingSenderId: "544679131587",
-                    appId: "1:544679131587:web:d3e3a682afd521cb9ce576"
+                    appId: "1:544679131587:web:50fd1eb3644fa5ec9ce576"
                     };
 
-                    // Con esto arrancamos la conexión a Firebase.
                     firebase.initializeApp(firebaseConfig);
-
-                    // Dejamos "auth" y "db" listos para que los use auth.js
-                    // (y más adelante catalogo.js, carrito.js, etc.)
                     const auth = firebase.auth();
                     const db = firebase.database();
