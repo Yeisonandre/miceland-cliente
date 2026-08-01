@@ -1,152 +1,159 @@
 /* =========================================================
    COLORES Y VALORES DE MARCA
-      Si en algún momento querés cambiar un color de toda la
-         app, lo cambiás acá una sola vez y se actualiza en todos
-            lados. Esto se llama "variables CSS".
-            ========================================================= */
-            :root{
-              --morado: #4B2E83;
-                --morado-oscuro: #33205C;
-                  --coral: #FF3B69;
-                    --amarillo: #FFC93C;
-                      --crema: #FAF7F5;
-                        --texto: #1A1523;
-                          --texto-suave: #7A7284;
-                            --linea: #ECE6F0;
-                            }
+   ========================================================= */
+   :root{
+     --morado: #4B2E83;
+       --morado-oscuro: #33205C;
+         --coral: #FF3B69;
+           --amarillo: #FFC93C;
+             --crema: #FAF7F5;
+               --texto: #1A1523;
+                 --texto-suave: #7A7284;
+                   --linea: #ECE6F0;
+                   }
 
-                            /* Reseteo básico: saca los márgenes raros que traen los
-                               navegadores por defecto */
-                               *{ box-sizing:border-box; }
-                               body{ margin:0; padding:0; background:var(--crema); }
-                               body, input, button{ font-family:'Inter', sans-serif; color:var(--texto); }
-                               h1, .marca{ font-family:'Baloo 2', sans-serif; }
-                               button{ cursor:pointer; }
+                   *{ box-sizing:border-box; }
+                   body{ margin:0; padding:0; background:var(--crema); }
+                   body, input, button{ font-family:'Inter', sans-serif; color:var(--texto); }
+                   h1, h3, .marca{ font-family:'Baloo 2', sans-serif; }
+                   button{ cursor:pointer; }
+                   img{ display:block; max-width:100%; }
 
-                               /* =========================================================
-                                  SISTEMA DE PANTALLAS
-                                     Todas las pantallas existen en el HTML al mismo tiempo,
-                                        pero solo se ve la que tiene la clase "visible".
-                                           El JS se encarga de sacar y poner esa clase.
-                                           ========================================================= */
-                                           .pantalla{ display:none; }
-                                           .pantalla.visible{ display:block; }
+                   /* =========================================================
+                      SISTEMA DE PANTALLAS
+                      ========================================================= */
+                      .pantalla{ display:none; }
+                      .pantalla.visible{ display:block; }
+                      #app-max{ max-width:520px; margin:0 auto; }
+
+                      /* =========================================================
+                         PANTALLA DE BIENVENIDA
+                         ========================================================= */
+                         .bienvenida{
+                           min-height:100vh;
+                             display:flex;
+                               flex-direction:column;
+                                 justify-content:center;
+                                   align-items:center;
+                                     background:linear-gradient(160deg, var(--morado) 0%, var(--morado-oscuro) 100%);
+                                       color:#fff;
+                                         padding:32px;
+                                           text-align:center;
+                                           }
+                                           .marca{ font-size:36px; font-weight:800; margin-bottom:6px; }
+                                           .marca span{ color:var(--amarillo); }
+                                           .frase{ color:rgba(255,255,255,0.75); font-size:13px; margin-bottom:36px; max-width:280px; }
 
                                            /* =========================================================
-                                              PANTALLA DE BIENVENIDA
+                                              BOTONES
                                               ========================================================= */
-                                              .bienvenida{
-                                                min-height:100vh;
-                                                  display:flex;
-                                                    flex-direction:column;
-                                                      justify-content:center;
-                                                        align-items:center;
-                                                          background:linear-gradient(160deg, var(--morado) 0%, var(--morado-oscuro) 100%);
-                                                            color:#fff;
-                                                              padding:32px;
-                                                                text-align:center;
-                                                                }
-                                                                .marca{
-                                                                  font-size:36px;
-                                                                    font-weight:800;
-                                                                      margin-bottom:6px;
+                                              .boton{
+                                                width:100%; max-width:340px; padding:14px; border-radius:999px; border:none;
+                                                  font-weight:700; font-size:15px; margin-bottom:12px;
+                                                  }
+                                                  .boton-lleno{ background:var(--coral); color:#fff; box-shadow:0 6px 16px rgba(255,59,105,0.35); }
+                                                  .boton-lleno:disabled{ opacity:0.55; }
+                                                  .boton-borde{ background:rgba(255,255,255,0.1); border:1.5px solid rgba(255,255,255,0.3); color:#fff; }
+
+                                                  /* =========================================================
+                                                     PANTALLA DE FORMULARIO (login / registro)
+                                                     ========================================================= */
+                                                     .tarjeta-formulario{ max-width:400px; margin:0 auto; padding:24px 20px 40px; }
+                                                     .boton-volver{ background:none; border:none; color:var(--texto-suave); font-size:14px; font-weight:600; padding:8px 0; margin-bottom:12px; }
+                                                     .tarjeta-formulario h1{ font-size:22px; margin:0 0 20px; }
+                                                     .mensaje-error{ display:none; background:#FFE7EC; color:#C21F4B; font-size:12.5px; font-weight:600; padding:10px 12px; border-radius:10px; margin-bottom:14px; }
+                                                     .mensaje-error.visible{ display:block; }
+                                                     .campo{ margin-bottom:14px; }
+                                                     .campo label{ display:block; font-size:12.5px; font-weight:700; color:var(--texto-suave); margin-bottom:6px; }
+                                                     .campo input, .campo textarea{
+                                                       width:100%; padding:12px 14px; border-radius:10px; border:1.5px solid var(--linea);
+                                                         font-size:14px; outline:none; background:#fff;
+                                                         }
+                                                         .campo input:focus, .campo textarea:focus{ border-color:var(--coral); }
+                                                         .tarjeta-formulario .boton{ margin-top:8px; }
+                                                         .texto-alterno{ text-align:center; font-size:13px; color:var(--texto-suave); margin-top:16px; }
+                                                         .texto-alterno b{ color:var(--coral); font-weight:700; cursor:pointer; }
+
+                                                         /* =========================================================
+                                                            PANTALLA CATÁLOGO
+                                                            ========================================================= */
+                                                            #pantalla-catalogo{ max-width:520px; margin:0 auto; min-height:100vh; padding-bottom:24px; }
+
+                                                            .topbar{
+                                                              background:linear-gradient(135deg, var(--morado) 0%, var(--morado-oscuro) 100%);
+                                                                padding:16px 16px 20px; border-radius:0 0 22px 22px; color:#fff;
+                                                                  position:sticky; top:0; z-index:30;
+                                                                  }
+                                                                  .topbar-fila1{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+                                                                  .icono-btn{
+                                                                    width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.14);
+                                                                      border:none; display:flex; align-items:center; justify-content:center; color:#fff;
                                                                       }
-                                                                      .marca span{ color:var(--amarillo); }
-                                                                      .frase{
-                                                                        color:rgba(255,255,255,0.75);
-                                                                          font-size:13px;
-                                                                            margin-bottom:36px;
-                                                                              max-width:280px;
+                                                                      .buscador{
+                                                                        display:flex; align-items:center; gap:8px; background:#fff; border-radius:999px;
+                                                                          padding:10px 14px; box-shadow:0 4px 16px rgba(75,46,131,0.10);
+                                                                          }
+                                                                          .buscador input{ border:none; outline:none; flex:1; font-size:14px; color:var(--texto); background:transparent; }
+                                                                          .buscador input::placeholder{ color:var(--texto-suave); }
+
+                                                                          .categorias-wrap{ padding:14px 0 0; overflow-x:auto; white-space:nowrap; scrollbar-width:none; }
+                                                                          .categorias-wrap::-webkit-scrollbar{ display:none; }
+                                                                          .categorias-lista{ display:inline-flex; gap:8px; }
+                                                                          .chip-cat{
+                                                                            flex-shrink:0; padding:8px 16px; border-radius:999px; border:1.5px solid rgba(255,255,255,0.25);
+                                                                              background:rgba(255,255,255,0.08); font-size:13px; font-weight:600; color:#fff; transition:all .15s;
                                                                               }
+                                                                              .chip-cat.activo{ background:var(--coral); border-color:var(--coral); color:#fff; }
 
-                                                                              /* =========================================================
-                                                                                 BOTONES (reutilizables en toda la app)
-                                                                                 ========================================================= */
-                                                                                 .boton{
-                                                                                   width:100%;
-                                                                                     max-width:340px;
-                                                                                       padding:14px;
-                                                                                         border-radius:999px;
-                                                                                           border:none;
-                                                                                             font-weight:700;
-                                                                                               font-size:15px;
-                                                                                                 margin-bottom:12px;
+                                                                              .seccion-titulo{ font-size:16px; font-weight:800; margin:18px 16px 10px; }
+
+                                                                              .grid-productos{ display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:0 16px; }
+                                                                              .tarjeta-producto{
+                                                                                background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 4px 16px rgba(75,46,131,0.08);
+                                                                                  display:flex; flex-direction:column;
+                                                                                  }
+                                                                                  .imagen-wrap{ width:100%; aspect-ratio:1/1; background:var(--linea); overflow:hidden; }
+                                                                                  .imagen-wrap img{ width:100%; height:100%; object-fit:cover; }
+                                                                                  .info-producto{ padding:9px 10px 11px; display:flex; flex-direction:column; gap:4px; }
+                                                                                  .nombre-producto{
+                                                                                    font-size:12.5px; font-weight:600; line-height:1.3; color:var(--texto);
+                                                                                      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:32px;
+                                                                                      }
+                                                                                      .precio-producto{ font-size:16px; font-weight:800; color:var(--coral); font-family:'Baloo 2',sans-serif; }
+                                                                                      .categoria-producto{ font-size:10.5px; color:var(--texto-suave); }
+
+                                                                                      .vacio{ text-align:center; padding:60px 20px; color:var(--texto-suave); }
+                                                                                      .cargando{ display:flex; align-items:center; justify-content:center; padding:60px 0; color:var(--texto-suave); font-size:13px; }
+                                                                                      .spinner{ width:22px; height:22px; border:3px solid var(--linea); border-top-color:var(--coral); border-radius:50%; animation:girar .7s linear infinite; margin-right:8px; }
+                                                                                      @keyframes girar{ to{ transform:rotate(360deg); } }
+
+                                                                                      /* =========================================================
+                                                                                         OVERLAY / DETALLE DE PRODUCTO
+                                                                                         ========================================================= */
+                                                                                         .overlay{
+                                                                                           display:none; position:fixed; inset:0; background:rgba(26,21,35,0.5); z-index:50;
+                                                                                             align-items:flex-end; justify-content:center;
+                                                                                             }
+                                                                                             .overlay.visible{ display:flex; }
+                                                                                             .hoja{
+                                                                                               background:#fff; width:100%; max-width:520px; border-radius:22px 22px 0 0; max-height:92vh; overflow-y:auto;
+                                                                                                 animation:subir .25s ease-out;
                                                                                                  }
-                                                                                                 .boton-lleno{
-                                                                                                   background:var(--coral);
-                                                                                                     color:#fff;
-                                                                                                       box-shadow:0 6px 16px rgba(255,59,105,0.35);
-                                                                                                       }
-                                                                                                       .boton-lleno:disabled{ opacity:0.55; }
-                                                                                                       .boton-borde{
-                                                                                                         background:rgba(255,255,255,0.1);
-                                                                                                           border:1.5px solid rgba(255,255,255,0.3);
-                                                                                                             color:#fff;
-                                                                                                             }
-
-                                                                                                             /* =========================================================
-                                                                                                                PANTALLA DE FORMULARIO (login / registro)
-                                                                                                                ========================================================= */
-                                                                                                                .tarjeta-formulario{
-                                                                                                                  max-width:400px;
-                                                                                                                    margin:0 auto;
-                                                                                                                      padding:24px 20px 40px;
-                                                                                                                      }
-                                                                                                                      .boton-volver{
-                                                                                                                        background:none;
-                                                                                                                          border:none;
-                                                                                                                            color:var(--texto-suave);
-                                                                                                                              font-size:14px;
-                                                                                                                                font-weight:600;
-                                                                                                                                  padding:8px 0;
-                                                                                                                                    margin-bottom:12px;
-                                                                                                                                    }
-                                                                                                                                    .tarjeta-formulario h1{
-                                                                                                                                      font-size:22px;
-                                                                                                                                        margin:0 0 20px;
-                                                                                                                                        }
-                                                                                                                                        .mensaje-error{
-                                                                                                                                          display:none;
-                                                                                                                                            background:#FFE7EC;
-                                                                                                                                              color:#C21F4B;
-                                                                                                                                                font-size:12.5px;
-                                                                                                                                                  font-weight:600;
-                                                                                                                                                    padding:10px 12px;
-                                                                                                                                                      border-radius:10px;
-                                                                                                                                                        margin-bottom:14px;
-                                                                                                                                                        }
-                                                                                                                                                        .mensaje-error.visible{ display:block; }
-
-                                                                                                                                                        .campo{ margin-bottom:14px; }
-                                                                                                                                                        .campo label{
-                                                                                                                                                          display:block;
-                                                                                                                                                            font-size:12.5px;
-                                                                                                                                                              font-weight:700;
-                                                                                                                                                                color:var(--texto-suave);
-                                                                                                                                                                  margin-bottom:6px;
-                                                                                                                                                                  }
-                                                                                                                                                                  .campo input{
-                                                                                                                                                                    width:100%;
-                                                                                                                                                                      padding:12px 14px;
-                                                                                                                                                                        border-radius:10px;
-                                                                                                                                                                          border:1.5px solid var(--linea);
-                                                                                                                                                                            font-size:14px;
-                                                                                                                                                                              outline:none;
-                                                                                                                                                                                background:#fff;
-                                                                                                                                                                                }
-                                                                                                                                                                                .campo input:focus{ border-color:var(--coral); }
-
-                                                                                                                                                                                .tarjeta-formulario .boton{ margin-top:8px; }
-
-                                                                                                                                                                                .texto-alterno{
-                                                                                                                                                                                  text-align:center;
-                                                                                                                                                                                    font-size:13px;
-                                                                                                                                                                                      color:var(--texto-suave);
-                                                                                                                                                                                        margin-top:16px;
-                                                                                                                                                                                        }
-                                                                                                                                                                                        .texto-alterno b{
-                                                                                                                                                                                          color:var(--coral);
-                                                                                                                                                                                            font-weight:700;
-                                                                                                                                                                                              cursor:pointer;
-                                                                                                                                                                                              }
-                                                                                                                                                                                              
+                                                                                                 @keyframes subir{ from{ transform:translateY(100%); } to{ transform:translateY(0); } }
+                                                                                                 .hoja-header{
+                                                                                                   display:flex; align-items:center; justify-content:space-between; padding:16px 18px;
+                                                                                                     border-bottom:1px solid var(--linea); position:sticky; top:0; background:#fff; z-index:2;
+                                                                                                     }
+                                                                                                     .hoja-header h3{ margin:0; font-size:17px; }
+                                                                                                     .cerrar-btn{
+                                                                                                       width:30px; height:30px; border-radius:50%; background:var(--crema); border:none;
+                                                                                                         display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--texto-suave);
+                                                                                                         }
+                                                                                                         .detalle-imagen{ width:100%; aspect-ratio:1/1; background:var(--linea); }
+                                                                                                         .detalle-imagen img{ width:100%; height:100%; object-fit:cover; }
+                                                                                                         .detalle-body{ padding:16px 18px 28px; }
+                                                                                                         .detalle-precio{ font-size:24px; font-weight:800; color:var(--coral); font-family:'Baloo 2',sans-serif; margin-bottom:8px; }
+                                                                                                         .detalle-nombre{ font-size:16px; font-weight:700; margin-bottom:4px; line-height:1.4; }
+                                                                                                         .detalle-categoria{ font-size:12px; color:var(--texto-suave); margin-bottom:12px; }
+                                                                                                         .detalle-descripcion{ font-size:13.5px; color:var(--texto-suave); line-height:1.6; }
+                                                                                                         

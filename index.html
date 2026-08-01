@@ -5,104 +5,125 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>MICELAND</title>
 
-<!-- Fuentes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Nuestro estilo -->
 <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
 
 <!-- ============================================
      PANTALLA 1: BIENVENIDA (splash)
-          Se ve primero. Tiene 2 botones que abren
-               el formulario de login o de registro.
-               ============================================= -->
-               <div class="pantalla visible" id="pantalla-bienvenida">
-                 <div class="bienvenida">
-                     <div class="marca">MICE<span>LAND</span></div>
-                         <p class="frase">Todo lo que buscás, a un precio que te va a encantar</p>
+     ============================================= -->
+     <div class="pantalla visible" id="pantalla-bienvenida">
+       <div class="bienvenida">
+           <div class="marca">MICE<span>LAND</span></div>
+               <p class="frase">Todo lo que buscás, a un precio que te va a encantar</p>
 
-                             <button class="boton boton-lleno" onclick="mostrarFormulario('login')">
-                                   Iniciar sesión
-                                       </button>
-                                           <button class="boton boton-borde" onclick="mostrarFormulario('registro')">
-                                                 Crear cuenta
-                                                     </button>
-                                                       </div>
-                                                       </div>
+                   <button class="boton boton-lleno" onclick="mostrarFormulario('login')">
+                         Iniciar sesión
+                             </button>
+                                 <button class="boton boton-borde" onclick="mostrarFormulario('registro')">
+                                       Crear cuenta
+                                           </button>
+                                             </div>
+                                             </div>
 
-                                                       <!-- ============================================
-                                                            PANTALLA 2: FORMULARIO (login o registro)
-                                                                 Es el mismo formulario para las dos cosas,
-                                                                      solo cambia el título y si muestra o no
-                                                                           los campos extra (nombre, teléfono).
-                                                                           ============================================= -->
-                                                                           <div class="pantalla" id="pantalla-formulario">
-                                                                             <div class="tarjeta-formulario">
+                                             <!-- ============================================
+                                                  PANTALLA 2: FORMULARIO (login o registro)
+                                                  ============================================= -->
+                                                  <div class="pantalla" id="pantalla-formulario">
+                                                    <div class="tarjeta-formulario">
+                                                        <button class="boton-volver" onclick="volverABienvenida()">← Volver</button>
+                                                            <h1 id="titulo-formulario">Iniciar sesión</h1>
+                                                                <div class="mensaje-error" id="mensaje-error"></div>
 
-                                                                                 <button class="boton-volver" onclick="volverABienvenida()">← Volver</button>
+                                                                    <div class="campo" id="campo-nombre" style="display:none;">
+                                                                          <label>Nombre completo</label>
+                                                                                <input type="text" id="input-nombre" placeholder="Tu nombre y apellido">
+                                                                                    </div>
+                                                                                        <div class="campo" id="campo-telefono" style="display:none;">
+                                                                                              <label>Teléfono</label>
+                                                                                                    <input type="tel" id="input-telefono" placeholder="Ej: 099123456">
+                                                                                                        </div>
+                                                                                                            <div class="campo">
+                                                                                                                  <label>Correo electrónico</label>
+                                                                                                                        <input type="email" id="input-email" placeholder="tucorreo@ejemplo.com">
+                                                                                                                            </div>
+                                                                                                                                <div class="campo">
+                                                                                                                                      <label>Contraseña</label>
+                                                                                                                                            <input type="password" id="input-password" placeholder="Mínimo 6 caracteres">
+                                                                                                                                                </div>
 
-                                                                                     <h1 id="titulo-formulario">Iniciar sesión</h1>
+                                                                                                                                                    <button class="boton boton-lleno" id="boton-enviar" onclick="enviarFormulario()">
+                                                                                                                                                          Iniciar sesión
+                                                                                                                                                              </button>
 
-                                                                                         <!-- Acá aparece un mensaje si algo sale mal -->
-                                                                                             <div class="mensaje-error" id="mensaje-error"></div>
+                                                                                                                                                                  <p class="texto-alterno" id="texto-alterno">
+                                                                                                                                                                        ¿No tenés cuenta? <b onclick="cambiarModo()">Registrate</b>
+                                                                                                                                                                            </p>
+                                                                                                                                                                              </div>
+                                                                                                                                                                              </div>
 
-                                                                                                 <!-- Estos 2 campos solo se ven en modo "registro" -->
-                                                                                                     <div class="campo" id="campo-nombre" style="display:none;">
-                                                                                                           <label>Nombre completo</label>
-                                                                                                                 <input type="text" id="input-nombre" placeholder="Tu nombre y apellido">
-                                                                                                                     </div>
-                                                                                                                         <div class="campo" id="campo-telefono" style="display:none;">
-                                                                                                                               <label>Teléfono</label>
-                                                                                                                                     <input type="tel" id="input-telefono" placeholder="Ej: 099123456">
-                                                                                                                                         </div>
+                                                                                                                                                                              <!-- ============================================
+                                                                                                                                                                                   PANTALLA 3: CATÁLOGO
+                                                                                                                                                                                        Esta es la pantalla principal una vez que el
+                                                                                                                                                                                             usuario inició sesión.
+                                                                                                                                                                                             ============================================= -->
+                                                                                                                                                                                             <div class="pantalla" id="pantalla-catalogo">
 
-                                                                                                                                             <div class="campo">
-                                                                                                                                                   <label>Correo electrónico</label>
-                                                                                                                                                         <input type="email" id="input-email" placeholder="tucorreo@ejemplo.com">
-                                                                                                                                                             </div>
-                                                                                                                                                                 <div class="campo">
-                                                                                                                                                                       <label>Contraseña</label>
-                                                                                                                                                                             <input type="password" id="input-password" placeholder="Mínimo 6 caracteres">
-                                                                                                                                                                                 </div>
+                                                                                                                                                                                               <div class="topbar">
+                                                                                                                                                                                                   <div class="topbar-fila1">
+                                                                                                                                                                                                         <div class="marca">MICE<span>LAND</span></div>
+                                                                                                                                                                                                               <button class="icono-btn" onclick="cerrarSesionUsuario()" title="Cerrar sesión">
+                                                                                                                                                                                                                       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                                                                                                                                                                                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                                                                                                                                                                                                                                           <polyline points="16 17 21 12 16 7"/>
+                                                                                                                                                                                                                                                     <line x1="21" y1="12" x2="9" y2="12"/>
+                                                                                                                                                                                                                                                             </svg>
+                                                                                                                                                                                                                                                                   </button>
+                                                                                                                                                                                                                                                                       </div>
+                                                                                                                                                                                                                                                                           <div class="buscador">
+                                                                                                                                                                                                                                                                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A7284" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                                                                                                                                                                                                                                                                       <input id="input-buscar" type="text" placeholder="Buscar productos..." oninput="filtrarProductos()">
+                                                                                                                                                                                                                                                                                           </div>
+                                                                                                                                                                                                                                                                                               <div class="categorias-wrap">
+                                                                                                                                                                                                                                                                                                     <div class="categorias-lista" id="lista-categorias"></div>
+                                                                                                                                                                                                                                                                                                         </div>
+                                                                                                                                                                                                                                                                                                           </div>
 
-                                                                                                                                                                                     <button class="boton boton-lleno" id="boton-enviar" onclick="enviarFormulario()">
-                                                                                                                                                                                           Iniciar sesión
-                                                                                                                                                                                               </button>
+                                                                                                                                                                                                                                                                                                             <div class="seccion-titulo" id="titulo-seccion">Todos los productos</div>
+                                                                                                                                                                                                                                                                                                               <div class="grid-productos" id="grid-productos"></div>
+                                                                                                                                                                                                                                                                                                                 <div class="vacio" id="mensaje-vacio" style="display:none;">No encontramos productos con esa búsqueda 🔍</div>
+                                                                                                                                                                                                                                                                                                                 </div>
 
-                                                                                                                                                                                                   <p class="texto-alterno" id="texto-alterno">
-                                                                                                                                                                                                         ¿No tenés cuenta? <b onclick="cambiarModo()">Registrate</b>
-                                                                                                                                                                                                             </p>
-                                                                                                                                                                                                               </div>
-                                                                                                                                                                                                               </div>
+                                                                                                                                                                                                                                                                                                                 <!-- ============================================
+                                                                                                                                                                                                                                                                                                                      OVERLAY: DETALLE DE PRODUCTO
+                                                                                                                                                                                                                                                                                                                      ============================================= -->
+                                                                                                                                                                                                                                                                                                                      <div class="overlay" id="overlay-detalle">
+                                                                                                                                                                                                                                                                                                                        <div class="hoja">
+                                                                                                                                                                                                                                                                                                                            <div class="hoja-header">
+                                                                                                                                                                                                                                                                                                                                  <h3>Detalle</h3>
+                                                                                                                                                                                                                                                                                                                                        <button class="cerrar-btn" onclick="cerrarOverlay('overlay-detalle')">✕</button>
+                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                <div class="detalle-imagen"><img id="detalle-img" src="" alt=""></div>
+                                                                                                                                                                                                                                                                                                                                                    <div class="detalle-body">
+                                                                                                                                                                                                                                                                                                                                                          <div class="detalle-precio" id="detalle-precio">$0</div>
+                                                                                                                                                                                                                                                                                                                                                                <div class="detalle-nombre" id="detalle-nombre"></div>
+                                                                                                                                                                                                                                                                                                                                                                      <div class="detalle-categoria" id="detalle-categoria"></div>
+                                                                                                                                                                                                                                                                                                                                                                            <div class="detalle-descripcion" id="detalle-descripcion"></div>
+                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                  </div>
+                                                                                                                                                                                                                                                                                                                                                                                  </div>
 
-                                                                                                                                                                                                               <!-- ============================================
-                                                                                                                                                                                                                    PANTALLA 3: SESIÓN INICIADA (temporal)
-                                                                                                                                                                                                                         Por ahora solo confirma que el login
-                                                                                                                                                                                                                              funcionó. En la Fase 2 esto se reemplaza
-                                                                                                                                                                                                                                   por el catálogo real.
-                                                                                                                                                                                                                                   ============================================= -->
-                                                                                                                                                                                                                                   <div class="pantalla" id="pantalla-bienvenido-usuario">
-                                                                                                                                                                                                                                     <div class="bienvenida">
-                                                                                                                                                                                                                                         <div class="marca">MICE<span>LAND</span></div>
-                                                                                                                                                                                                                                             <p class="frase" id="texto-usuario-logueado">¡Hola!</p>
-                                                                                                                                                                                                                                                 <button class="boton boton-borde" onclick="cerrarSesionUsuario()">Cerrar sesión</button>
-                                                                                                                                                                                                                                                   </div>
-                                                                                                                                                                                                                                                   </div>
+                                                                                                                                                                                                                                                                                                                                                                                  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+                                                                                                                                                                                                                                                                                                                                                                                  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+                                                                                                                                                                                                                                                                                                                                                                                  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
-                                                                                                                                                                                                                                                   <!-- ============================================
-                                                                                                                                                                                                                                                        Cargamos primero Firebase, después nuestra
-                                                                                                                                                                                                                                                             configuración, y al final la lógica.
-                                                                                                                                                                                                                                                             ============================================= -->
-                                                                                                                                                                                                                                                             <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-                                                                                                                                                                                                                                                             <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-                                                                                                                                                                                                                                                             <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+                                                                                                                                                                                                                                                                                                                                                                                  <script src="js/firebase-config.js"></script>
+                                                                                                                                                                                                                                                                                                                                                                                  <script src="js/auth.js"></script>
+                                                                                                                                                                                                                                                                                                                                                                                  <script src="js/catalogo.js"></script>
 
-                                                                                                                                                                                                                                                             <script src="js/firebase-config.js"></script>
-                                                                                                                                                                                                                                                             <script src="js/auth.js"></script>
-
-                                                                                                                                                                                                                                                             </body>
-                                                                                                                                                                                                                                                             </html>
-                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                  </body>
+                                                                                                                                                                                                                                                                                                                                                                                  </html>
+                                                                                                                                                                                                                                                                                                                                                                                  
