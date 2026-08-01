@@ -21,7 +21,7 @@
              function cargarProductos(){
                document.getElementById("grid-productos").innerHTML = '<div class="cargando"><div class="spinner"></div>Cargando productos...</div>';
 
-                 db.ref("productos").once("value").then(snap => {
+                 db.ref("Productos").once("value").then(snap => {
                      const datos = snap.val() || {};
                          TODOS_LOS_PRODUCTOS = Object.keys(datos).map(codigo => {
                                const p = datos[codigo];
@@ -131,4 +131,3 @@
                                                                                                                                                                                                                                                                                                          function cerrarOverlay(id){
                                                                                                                                                                                                                                                                                                            document.getElementById(id).classList.remove("visible");
                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                           
