@@ -1,29 +1,21 @@
 /* =========================================================
    CONFIGURACIÓN DE FIREBASE
-      Este es el ÚNICO archivo que tenés que editar con tus
-         datos reales antes de que la app funcione de verdad.
+      Estos son los datos reales del proyecto MICELAND.
+      ========================================================= */
+      const firebaseConfig = {
+        apiKey: "AIzaSyCbz2oHE-8eDTdLGza46Cs3eJ6cJDa38ko",
+          authDomain: "miceland-d7bed.firebaseapp.com",
+            databaseURL: "https://miceland-d7bed-default-rtdb.firebaseio.com",
+              projectId: "miceland-d7bed",
+                storageBucket: "miceland-d7bed.firebasestorage.app",
+                  messagingSenderId: "544679131587",
+                    appId: "1:544679131587:web:d3e3a682afd521cb9ce576"
+                    };
 
-            ¿Dónde los conseguís?
-               Firebase Console → ⚙️ Configuración del proyecto →
-                  "Tus apps" → tu app web → "SDK setup and configuration"
+                    // Con esto arrancamos la conexión a Firebase.
+                    firebase.initializeApp(firebaseConfig);
 
-                     Reemplazá cada "REEMPLAZAR..." por el valor real.
-                     ========================================================= */
-                     const firebaseConfig = {
-                       apiKey: "REEMPLAZAR_API_KEY",
-                         authDomain: "REEMPLAZAR.firebaseapp.com",
-                           databaseURL: "https://REEMPLAZAR-default-rtdb.firebaseio.com",
-                             projectId: "REEMPLAZAR",
-                               storageBucket: "REEMPLAZAR.appspot.com",
-                                 messagingSenderId: "REEMPLAZAR",
-                                   appId: "REEMPLAZAR"
-                                   };
-
-                                   // Con esto arrancamos la conexión a Firebase.
-                                   firebase.initializeApp(firebaseConfig);
-
-                                   // Dejamos "auth" y "db" listos para que los use auth.js
-                                   // (y más adelante catalogo.js, carrito.js, etc.)
-                                   const auth = firebase.auth();
-                                   const db = firebase.database();
-                                   
+                    // Dejamos "auth" y "db" listos para que los use auth.js
+                    // (y más adelante catalogo.js, carrito.js, etc.)
+                    const auth = firebase.auth();
+                    const db = firebase.database();
