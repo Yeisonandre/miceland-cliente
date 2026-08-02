@@ -1,17 +1,16 @@
 /* =========================================================
    COLORES Y VALORES DE MARCA
    ========================================================= */
-   :root{
-     --morado: #4B2E83;
-       --morado-oscuro: #33205C;
-         --coral: #FF3B69;
-           --amarillo: #FFC93C;
-             --crema: #FAF7F5;
-               --texto: #1A1523;
-                 --texto-suave: #7A7284;
-                   --linea: #ECE6F0;
-                   }
-
+  :root{
+      --morado: #ffff;
+        --morado-oscuro: #33205C;
+          --coral: #FF3B69;
+            --amarillo: #FFC93C;
+              --crema: #FAF7F5;
+                --texto: #1A1523;
+                  --texto-suave: #7A7284;
+                    --linea: #ECE6F0;
+                    }
                    *{ box-sizing:border-box; }
                    body{ margin:0; padding:0; background:var(--crema); }
                    body, input, button, textarea{ font-family:'Inter', sans-serif; color:var(--texto); }
