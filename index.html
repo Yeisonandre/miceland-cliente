@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>MICELAND</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+<!-- ============================================
+     PANTALLA 1: BIENVENIDA (splash)
+============================================= -->
+<div class="pantalla visible" id="pantalla-bienvenida">
+  <div class="bienvenida">
+    <div class="marca">MICE<span>LAND</span></div>
+    <p class="frase">Todo lo que buscás, a un precio que te va a encantar</p>
+
+    <button class="boton boton-lleno" onclick="mostrarFormulario('login')">
+      Iniciar sesión
+    </button>
+    <button class="boton boton-borde" onclick="mostrarFormulario('registro')">
+      Crear cuenta
+    </button>
+
+    <p class="texto-legal-splash">
+      Al continuar, aceptás nuestros
+      <b onclick="mostrarLegal('terminos')">Términos y Condiciones</b> y nuestra
+      <b onclick="mostrarLegal('privacidad')">Política de Privacidad</b>.
+    </p>
+  </div>
+</div>
+
+<!-- ============================================
+     PANTALLA 2: FORMULARIO (login o registro)
+============================================= -->
+<div class="pantalla" id="pantalla-formulario">
+  <div class="tarjeta-formulario">
+    <button class="boton-volver" onclick="volverABienvenida()">← Volver</button>
+    <h1 id="titulo-formulario">Iniciar sesión</h1>
+    <div class="mensaje-error" id="mensaje-error"></div>
+
+    <div class="campo" id="campo-nombre" style="display:none;">
+      <label>Nombre completo</label>
+      <input type="text" id="input-nombre" placeholder="Tu nombre y apellido">
+    </div>
+    <div class="campo" id="campo-telefono" style="display:none;">
+      <label>Teléfono</label>
+      <input type="tel" id="input-telefono" placeholder="Ej: 099123456">
+    </div>
+    <div class="campo" id="campo-nacimiento" style="display:none;">
+      <label>Fecha de nacimiento</label>
+      <input type="date" id="input-nacimiento">
+    </div>
+    <div class="campo" id="campo-sexo" style="display:none;">
+      <label>Sexo</label>
+      <select id="input-sexo">
+        <option value="">Seleccioná una opción</option>
+        <option value="Hombre">Hombre</option>
+        <option value="Mujer">Mujer</option>
+        <option value="Otro">Otro</option>
+      </select>
+    </div>
+    <div class="campo" id="campo-documento" style="display:none;">
+      <label>Número de identidad</label>
+      <input type="text" id="input-documento" placeholder="Cédula / documento de identidad">
+    </div>
+    <div class="campo" id="campo-foto" style="display:none;">
+      <label>Foto de perfil (opcional)</label>
+      <input type="text" id="input-foto" placeholder="Pegá el link de tu foto (opcional)">
+    </div>
+    <div class="campo">
+      <label>Correo electrónico</label>
+      <input type="email" id="input-email" placeholder="tucorreo@ejemplo.com">
+    </div>
+    <div class="campo">
+      <label>Contraseña</label>
+      <input type="password" id="input-password" placeholder="Mínimo 6 caracteres">
+    </div>
+
+    <label class="fila-checkbox" id="fila-aceptar-terminos" style="display:none;">
+      <input type="checkbox" id="check-terminos">
+      <span>Acepto los <b onclick="mostrarLegal('terminos')">Términos y Condiciones</b> y la <b onclick="mostrarLegal('privacidad')">Política de Privacidad</b></span>
+    </label>
+
+    <button class="boton boton-lleno" id="boton-enviar" onclick="enviarFormulario()">
+      Iniciar sesión
+    </button>
+
+    <p class="texto-alterno" id="texto-alterno">
+      ¿No tenés cuenta? <b onclick="cambiarModo()">Registrate</b>
+    </p>
+  </div>
+</div>
+
+<!-- ============================================
+     PANTALLA 3: CATÁLOGO (pantalla principal)
+============================================= -->
+<div class="pantalla" id="pantalla-catalogo">
+
+  <div class="topbar">
+    <div class="topbar-fila1">
+      <div class="marca">MICE<span>LAND</span></div>
+      <div class="iconos-topbar">
+        <button class="icono-btn" onclick="abrirCarrito()" title="Carrito">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          <span class="badge-carrito" id="badge-carrito" style="display:none;">0</span>
+        </button>
+      </div>
+    </div>
+    <div class="buscador">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A7284" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="input-buscar" type="text" placeholder="Buscar productos..." oninput="filtrarProductos()">
+    </div>
+    <div class="categorias-wrap">
+      <div class="categorias-lista" id="lista-categorias"></div>
+    </div>
+  </div>
+
+  <div class="seccion-titulo" id="titulo-seccion">Todos los productos</div>
+  <div class="grid-productos" id="grid-productos"></div>
+  <div class="vacio" id="mensaje-vacio" style="display:none;">No encontramos productos con esa búsqueda 🔍</div>
+
+  <div style="height:80px;"></div>
+  <div class="nav-inferior">
+    <button class="nav-item activo" data-nav="inicio" onclick="irAInicio()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      Inicio
+    </button>
+    <button class="nav-item" data-nav="carrito" onclick="abrirCarrito()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Carrito
+    </button>
+    <button class="nav-item" data-nav="perfil" onclick="irAPerfil()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+      Perfil
+    </button>
+  </div>
+</div>
+
+<!-- ============================================
+     PANTALLA 5: PERFIL DEL USUARIO
+============================================= -->
+<div class="pantalla" id="pantalla-perfil">
+
+  <div class="perfil-header">
+    <div class="perfil-avatar" id="perfil-inicial">?</div>
+    <div>
+      <div class="perfil-nombre" id="perfil-nombre">Invitado</div>
+      <div class="perfil-email" id="perfil-email">Explorando sin cuenta</div>
+    </div>
+  </div>
+
+  <div class="perfil-lista">
+
+    <!-- Se muestra solo si es invitado -->
+    <div id="perfil-acciones-invitado" style="display:none;">
+      <button class="boton boton-lleno" style="width:100%; margin:0 0 10px;" onclick="mostrarFormulario('login')">Iniciar sesión</button>
+      <button class="boton boton-borde" style="width:100%; margin:0 0 20px; background:transparent; border-color:var(--linea); color:var(--texto);" onclick="mostrarFormulario('registro')">Crear cuenta</button>
+    </div>
+
+    <!-- Se muestra solo si hay usuario logueado -->
+    <div id="perfil-datos-usuario" style="display:none;">
+
+      <div class="titulo-bloque">Mis datos de envío</div>
+      <p class="ayuda-bloque">Esta información se usa para tus pedidos y el envío.</p>
+
+      <div class="mensaje-error" id="mensaje-error-perfil"></div>
+
+      <div class="campo">
+        <label>Nombre completo</label>
+        <input type="text" id="perfil-input-nombre">
+      </div>
+      <div class="campo">
+        <label>Teléfono</label>
+        <input type="tel" id="perfil-input-telefono">
+      </div>
+      <div class="campo">
+        <label>Foto de perfil (link, opcional)</label>
+        <input type="text" id="perfil-input-foto" placeholder="Pegá el link de tu foto">
+      </div>
+      <div class="campo">
+        <label>Sexo</label>
+        <select id="perfil-input-sexo">
+          <option value="">Seleccioná una opción</option>
+          <option value="Hombre">Hombre</option>
+          <option value="Mujer">Mujer</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>Número de identidad</label>
+        <input type="text" id="perfil-input-documento" placeholder="Cédula / documento de identidad">
+      </div>
+      <div class="campo">
+        <label>Dirección</label>
+        <input type="text" id="perfil-input-direccion" placeholder="Calle, número">
+      </div>
+      <div class="campo">
+        <label>Ciudad / Localidad</label>
+        <input type="text" id="perfil-input-ciudad">
+      </div>
+      <div class="campo">
+        <label>Referencia (opcional)</label>
+        <input type="text" id="perfil-input-referencia" placeholder="Casa, apto, color de puerta, etc.">
+      </div>
+
+      <button class="boton boton-lleno" style="width:100%;" onclick="guardarPerfil()" id="boton-guardar-perfil">Guardar cambios</button>
+
+      <div class="titulo-bloque" style="margin-top:28px;">Mis pedidos</div>
+      <div id="lista-pedidos"></div>
+
+      <div class="titulo-bloque" style="margin-top:28px;">Legal</div>
+      <div class="perfil-item" onclick="mostrarLegal('terminos')">
+        <span>Términos y Condiciones</span><span class="flecha">›</span>
+      </div>
+      <div class="perfil-item" onclick="mostrarLegal('privacidad')">
+        <span>Política de Privacidad</span><span class="flecha">›</span>
+      </div>
+      <div class="perfil-item" onclick="mostrarLegal('seguridad')">
+        <span>Política de Seguridad</span><span class="flecha">›</span>
+      </div>
+
+      <button class="boton boton-borde" style="width:100%; margin-top:24px; background:transparent; border-color:var(--linea); color:var(--coral);" onclick="cerrarSesionUsuario()">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <div style="height:80px;"></div>
+  <div class="nav-inferior">
+    <button class="nav-item" data-nav="inicio" onclick="irAInicio()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      Inicio
+    </button>
+    <button class="nav-item" data-nav="carrito" onclick="abrirCarrito()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Carrito
+    </button>
+    <button class="nav-item activo" data-nav="perfil" onclick="irAPerfil()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+      Perfil
+    </button>
+  </div>
+</div>
+
+<!-- ============================================
+     PANTALLA 6: LEGAL (Términos / Privacidad / Seguridad)
+     Es una sola pantalla que cambia su contenido
+     según lo que se haya tocado.
+============================================= -->
+<div class="pantalla" id="pantalla-legal">
+  <div class="tarjeta-formulario">
+    <button class="boton-volver" onclick="volverDeLegal()">← Volver</button>
+    <h1 id="titulo-legal">Términos y Condiciones</h1>
+    <div class="texto-legal" id="contenido-legal"></div>
+  </div>
+</div>
+
+<!-- ============================================
+     OVERLAY: DETALLE DE PRODUCTO
+============================================= -->
+<div class="overlay" id="overlay-detalle">
+  <div class="hoja">
+    <div class="hoja-header">
+      <h3>Detalle</h3>
+      <button class="cerrar-btn" onclick="cerrarOverlay('overlay-detalle')">✕</button>
+    </div>
+
+    <div class="galeria-wrap">
+      <!-- Si el producto tiene un video corto (10-20 seg), se
+           muestra primero, se reproduce solo, en loop y sin
+           sonido — como en Temu, Shein o TikTok. -->
+      <div class="video-producto-wrap" id="video-producto-wrap" style="display:none;">
+        <video id="video-producto" class="video-producto" autoplay loop muted playsinline></video>
+        <span class="etiqueta-video">🎬 Video</span>
+      </div>
+      <div class="galeria-imagenes" id="galeria-imagenes"></div>
+      <div class="galeria-puntos" id="galeria-puntos"></div>
+    </div>
+
+    <div class="detalle-body">
+      <div class="detalle-precio" id="detalle-precio">$0</div>
+      <div class="detalle-nombre" id="detalle-nombre"></div>
+      <div class="detalle-categoria" id="detalle-categoria"></div>
+      <div class="detalle-descripcion" id="detalle-descripcion"></div>
+      <button class="boton boton-lleno" style="margin-top:16px; width:100%;" onclick="agregarAlCarritoDesdeDetalle()">Agregar al carrito</button>
+
+      <div class="titulo-bloque" style="margin-top:24px;">También te puede interesar</div>
+      <div class="fila-relacionados" id="fila-relacionados"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     OVERLAY: CARRITO
+============================================= -->
+<div class="overlay" id="overlay-carrito">
+  <div class="hoja">
+    <div class="hoja-header">
+      <h3>Mi carrito</h3>
+      <button class="cerrar-btn" onclick="cerrarOverlay('overlay-carrito')">✕</button>
+    </div>
+    <div id="contenido-carrito"></div>
+  </div>
+</div>
+
+<!-- ============================================
+     OVERLAY: COMPLETAR PERFIL
+     Se usa más adelante, en el checkout, si al
+     usuario le falta algún dato de envío.
+============================================= -->
+<div class="overlay" id="overlay-completar-perfil">
+  <div class="hoja">
+    <div class="hoja-header">
+      <h3>Nos falta un dato</h3>
+      <button class="cerrar-btn" onclick="cerrarOverlay('overlay-completar-perfil')">✕</button>
+    </div>
+    <p style="padding:0 18px; font-size:13px; color:var(--texto-suave);">
+      Antes de continuar, completá esta información para poder procesar tu pedido.
+    </p>
+    <div id="campos-completar-perfil"></div>
+    <button class="boton boton-lleno" style="width:calc(100% - 36px); margin:10px 18px 20px;" onclick="guardarCompletarPerfil()">Continuar</button>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script src="js/firebase-config.js"></script>
+<script src="js/legal.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/catalogo.js"></script>
+<script src="js/carrito.js"></script>
+<script src="js/perfil.js"></script>
+
+</body>
+</html>
