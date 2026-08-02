@@ -14,19 +14,18 @@
 
                    *{ box-sizing:border-box; }
                    body{ margin:0; padding:0; background:var(--crema); }
-                   body, input, button{ font-family:'Inter', sans-serif; color:var(--texto); }
+                   body, input, button, textarea{ font-family:'Inter', sans-serif; color:var(--texto); }
                    h1, h3, .marca{ font-family:'Baloo 2', sans-serif; }
                    button{ cursor:pointer; }
-                   img{ display:block; max-width:100%; }
+                   img, video{ display:block; max-width:100%; }
 
                    /* =========================================================
                       SISTEMA DE PANTALLAS
                       ========================================================= */
                       .pantalla{ display:none; }
                       .pantalla.visible{ display:block; }
-                      #app-max{ max-width:520px; margin:0 auto; }
 
-                      /* ========================================================
+                      /* =========================================================
                          PANTALLA DE BIENVENIDA
                          ========================================================= */
                          .bienvenida{
@@ -44,115 +43,236 @@
                                            .marca span{ color:var(--amarillo); }
                                            .frase{ color:rgba(255,255,255,0.75); font-size:13px; margin-bottom:36px; max-width:280px; }
 
-                                           /* =========================================================
-                                              BOTONES
-                                              ========================================================= */
-                                              .boton{
-                                                width:100%; max-width:340px; padding:14px; border-radius:999px; border:none;
-                                                  font-weight:700; font-size:15px; margin-bottom:12px;
-                                                  }
-                                                  .boton-lleno{ background:var(--coral); color:#fff; box-shadow:0 6px 16px rgba(255,59,105,0.35); }
-                                                  .boton-lleno:disabled{ opacity:0.55; }
-                                                  .boton-borde{ background:rgba(255,255,255,0.1); border:1.5px solid rgba(255,255,255,0.3); color:#fff; }
+                                           .link-invitado{
+                                             background:none; border:none; color:#fff; font-size:13px; font-weight:700;
+                                               margin-top:18px; text-decoration:underline;
+                                               }
+                                               .texto-legal-splash{
+                                                 color:rgba(255,255,255,0.55); font-size:11px; max-width:300px; margin-top:28px; line-height:1.6;
+                                                 }
+                                                 .texto-legal-splash b{ color:rgba(255,255,255,0.85); font-weight:700; cursor:pointer; }
 
-                                                  /* =========================================================
-                                                     PANTALLA DE FORMULARIO (login / registro)
-                                                     ========================================================= */
-                                                     .tarjeta-formulario{ max-width:400px; margin:0 auto; padding:24px 20px 40px; }
-                                                     .boton-volver{ background:none; border:none; color:var(--texto-suave); font-size:14px; font-weight:600; padding:8px 0; margin-bottom:12px; }
-                                                     .tarjeta-formulario h1{ font-size:22px; margin:0 0 20px; }
-                                                     .mensaje-error{ display:none; background:#FFE7EC; color:#C21F4B; font-size:12.5px; font-weight:600; padding:10px 12px; border-radius:10px; margin-bottom:14px; }
-                                                     .mensaje-error.visible{ display:block; }
-                                                     .campo{ margin-bottom:14px; }
-                                                     .campo label{ display:block; font-size:12.5px; font-weight:700; color:var(--texto-suave); margin-bottom:6px; }
-                                                     .campo input, .campo textarea{
-                                                       width:100%; padding:12px 14px; border-radius:10px; border:1.5px solid var(--linea);
-                                                         font-size:14px; outline:none; background:#fff;
-                                                         }
-                                                         .campo input:focus, .campo textarea:focus{ border-color:var(--coral); }
-                                                         .tarjeta-formulario .boton{ margin-top:8px; }
-                                                         .texto-alterno{ text-align:center; font-size:13px; color:var(--texto-suave); margin-top:16px; }
-                                                         .texto-alterno b{ color:var(--coral); font-weight:700; cursor:pointer; }
+                                                 /* =========================================================
+                                                    BOTONES
+                                                    ========================================================= */
+                                                    .boton{
+                                                      width:100%; max-width:340px; padding:14px; border-radius:999px; border:none;
+                                                        font-weight:700; font-size:15px; margin-bottom:12px;
+                                                        }
+                                                        .boton-lleno{ background:var(--coral); color:#fff; box-shadow:0 6px 16px rgba(255,59,105,0.35); }
+                                                        .boton-lleno:disabled{ opacity:0.55; }
+                                                        .boton-borde{ background:rgba(255,255,255,0.1); border:1.5px solid rgba(255,255,255,0.3); color:#fff; }
 
-                                                         /* =========================================================
-                                                            PANTALLA CATÁLOGO
-                                                            ========================================================= */
-                                                            #pantalla-catalogo{ max-width:520px; margin:0 auto; min-height:100vh; padding-bottom:24px; }
+                                                        /* =========================================================
+                                                           PANTALLA DE FORMULARIO (login / registro)
+                                                           ========================================================= */
+                                                           .tarjeta-formulario{ max-width:400px; margin:0 auto; padding:24px 20px 40px; }
+                                                           .boton-volver{ background:none; border:none; color:var(--texto-suave); font-size:14px; font-weight:600; padding:8px 0; margin-bottom:12px; }
+                                                           .tarjeta-formulario h1{ font-size:22px; margin:0 0 20px; }
+                                                           .mensaje-error{ display:none; background:#FFE7EC; color:#C21F4B; font-size:12.5px; font-weight:600; padding:10px 12px; border-radius:10px; margin-bottom:14px; }
+                                                           .mensaje-error.visible{ display:block; }
+                                                           .campo{ margin-bottom:14px; }
+                                                           .campo label{ display:block; font-size:12.5px; font-weight:700; color:var(--texto-suave); margin-bottom:6px; }
+                                                           .campo input, .campo textarea{
+                                                             width:100%; padding:12px 14px; border-radius:10px; border:1.5px solid var(--linea);
+                                                               font-size:14px; outline:none; background:#fff;
+                                                               }
+                                                               .campo input:focus, .campo textarea:focus{ border-color:var(--coral); }
+                                                               .tarjeta-formulario .boton{ margin-top:8px; }
+                                                               .texto-alterno{ text-align:center; font-size:13px; color:var(--texto-suave); margin-top:16px; }
+                                                               .texto-alterno b{ color:var(--coral); font-weight:700; cursor:pointer; }
 
-                                                            .topbar{
-                                                              background:linear-gradient(135deg, var(--morado) 0%, var(--morado-oscuro) 100%);
-                                                                padding:16px 16px 20px; border-radius:0 0 22px 22px; color:#fff;
-                                                                  position:sticky; top:0; z-index:30;
-                                                                  }
-                                                                  .topbar-fila1{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
-                                                                  .icono-btn{
-                                                                    width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.14);
-                                                                      border:none; display:flex; align-items:center; justify-content:center; color:#fff;
-                                                                      }
-                                                                      .buscador{
-                                                                        display:flex; align-items:center; gap:8px; background:#fff; border-radius:999px;
-                                                                          padding:10px 14px; box-shadow:0 4px 16px rgba(75,46,131,0.10);
-                                                                          }
-                                                                          .buscador input{ border:none; outline:none; flex:1; font-size:14px; color:var(--texto); background:transparent; }
-                                                                          .buscador input::placeholder{ color:var(--texto-suave); }
+                                                               .fila-checkbox{
+                                                                 display:flex; align-items:flex-start; gap:8px; font-size:12px; color:var(--texto-suave);
+                                                                   margin-bottom:16px; line-height:1.5;
+                                                                   }
+                                                                   .fila-checkbox input{ margin-top:2px; flex-shrink:0; }
+                                                                   .fila-checkbox b{ color:var(--coral); font-weight:700; cursor:pointer; }
 
-                                                                          .categorias-wrap{ padding:14px 0 0; overflow-x:auto; white-space:nowrap; scrollbar-width:none; }
-                                                                          .categorias-wrap::-webkit-scrollbar{ display:none; }
-                                                                          .categorias-lista{ display:inline-flex; gap:8px; }
-                                                                          .chip-cat{
-                                                                            flex-shrink:0; padding:8px 16px; border-radius:999px; border:1.5px solid rgba(255,255,255,0.25);
-                                                                              background:rgba(255,255,255,0.08); font-size:13px; font-weight:600; color:#fff; transition:all .15s;
-                                                                              }
-                                                                              .chip-cat.activo{ background:var(--coral); border-color:var(--coral); color:#fff; }
+                                                                   /* =========================================================
+                                                                      PANTALLA LEGAL (Términos / Privacidad / Seguridad)
+                                                                      ========================================================= */
+                                                                      .texto-legal{ font-size:13.5px; color:var(--texto-suave); line-height:1.7; white-space:pre-line; }
 
-                                                                              .seccion-titulo{ font-size:16px; font-weight:800; margin:18px 16px 10px; }
+                                                                      /* =========================================================
+                                                                         TOPBAR / CATÁLOGO
+                                                                         ========================================================= */
+                                                                         #pantalla-catalogo, #pantalla-perfil{ max-width:520px; margin:0 auto; min-height:100vh; }
 
-                                                                              .grid-productos{ column: count 2px;columns- gap:10px; padding:0 16px; }
-                                                                              .tarjeta-producto{
-                                                                                background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 4px 16px rgba(75,46,131,0.08);
-                                                                                  display:flex; flex-direction:column;
-                                                                                  }
-                                                                                  .imagen-wrap{ width:100%; aspect-ratio:1/1; background:var(--linea); overflow:hidden; }
-                                                                                  .imagen-wrap img{ width:100%; height:100%; object-fit:cover; }
-                                                                                  .info-producto{ padding:9px 10px 11px; display:flex; flex-direction:column; gap:4px; }
-                                                                                  .nombre-producto{
-                                                                                    font-size:12.5px; font-weight:600; line-height:1.3; color:var(--texto);
-                                                                                      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:32px;
-                                                                                      }
-                                                                                      .precio-producto{ font-size:16px; font-weight:800; color:var(--coral); font-family:'Baloo 2',sans-serif; }
-                                                                                      .categoria-producto{ font-size:10.5px; color:var(--texto-suave); }
-
-                                                                                      .vacio{ text-align:center; padding:60px 20px; color:var(--texto-suave); }
-                                                                                      .cargando{ break-inside: avoid; margin: bottom 10px; px 0;display: block; }
-                                                                                      .spinner{ width:22px; height:22px; border:3px solid var(--linea); border-top-color:var(--coral); border-radius:50%; animation:girar .7s linear infinite; margin-right:8px; }
-                                                                                      @keyframes girar{ to{ transform:rotate(360deg); } }
-
-                                                                                      /* =========================================================
-                                                                                         OVERLAY / DETALLE DE PRODUCTO
-                                                                                         ========================================================= */
-                                                                                         .overlay{
-                                                                                           display:none; position:fixed; inset:0; background:rgba(26,21,35,0.5); z-index:50;
-                                                                                             align-items:flex-end; justify-content:center;
+                                                                         .topbar{
+                                                                           background:linear-gradient(135deg, var(--morado) 0%, var(--morado-oscuro) 100%);
+                                                                             padding:16px 16px 20px; border-radius:0 0 22px 22px; color:#fff;
+                                                                               position:sticky; top:0; z-index:30;
+                                                                               }
+                                                                               .topbar-fila1{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+                                                                               .iconos-topbar{ display:flex; gap:8px; }
+                                                                               .icono-btn{
+                                                                                 position:relative; width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.14);
+                                                                                   border:none; display:flex; align-items:center; justify-content:center; color:#fff;
+                                                                                   }
+                                                                                   .badge-carrito{
+                                                                                     position:absolute; top:-4px; right:-4px; background:var(--coral); color:#fff;
+                                                                                       font-size:10px; font-weight:800; min-width:17px; height:17px; border-radius:50%;
+                                                                                         display:flex; align-items:center; justify-content:center; padding:0 3px; border:2px solid var(--morado-oscuro);
+                                                                                         }
+                                                                                         .buscador{
+                                                                                           display:flex; align-items:center; gap:8px; background:#fff; border-radius:999px;
+                                                                                             padding:10px 14px; box-shadow:0 4px 16px rgba(75,46,131,0.10);
                                                                                              }
-                                                                                             .overlay.visible{ display:flex; }
-                                                                                             .hoja{
-                                                                                               background:#fff; width:100%; max-width:520px; border-radius:22px 22px 0 0; max-height:92vh; overflow-y:auto;
-                                                                                                 animation:subir .25s ease-out;
+                                                                                             .buscador input{ border:none; outline:none; flex:1; font-size:14px; color:var(--texto); background:transparent; }
+                                                                                             .buscador input::placeholder{ color:var(--texto-suave); }
+
+                                                                                             .categorias-wrap{ padding:14px 0 0; overflow-x:auto; white-space:nowrap; scrollbar-width:none; }
+                                                                                             .categorias-wrap::-webkit-scrollbar{ display:none; }
+                                                                                             .categorias-lista{ display:inline-flex; gap:8px; }
+                                                                                             .chip-cat{
+                                                                                               flex-shrink:0; padding:8px 16px; border-radius:999px; border:1.5px solid rgba(255,255,255,0.25);
+                                                                                                 background:rgba(255,255,255,0.08); font-size:13px; font-weight:600; color:#fff; transition:all .15s;
                                                                                                  }
-                                                                                                 @keyframes subir{ from{ transform:translateY(100%); } to{ transform:translateY(0); } }
-                                                                                                 .hoja-header{
-                                                                                                   display:flex; align-items:center; justify-content:space-between; padding:16px 18px;
-                                                                                                     border-bottom:1px solid var(--linea); position:sticky; top:0; background:#fff; z-index:2;
+                                                                                                 .chip-cat.activo{ background:var(--coral); border-color:var(--coral); color:#fff; }
+
+                                                                                                 .aviso-invitado{
+                                                                                                   margin:14px 16px 0; background:#FFF3D6; color:#8A5A00; font-size:12.5px; font-weight:600;
+                                                                                                     padding:10px 14px; border-radius:10px;
                                                                                                      }
-                                                                                                     .hoja-header h3{ margin:0; font-size:17px; }
-                                                                                                     .cerrar-btn{
-                                                                                                       width:30px; height:30px; border-radius:50%; background:var(--crema); border:none;
-                                                                                                         display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--texto-suave);
-                                                                                                         }
-                                                                                                         .detalle-imagen{ width:100%; aspect-ratio:1/1; background:var(--linea); }
-                                                                                                         .detalle-imagen img{ width:100%; height:100%; object-fit:cover; }
-                                                                                                         .detalle-body{ padding:16px 18px 28px; }
-                                                                                                         .detalle-precio{ font-size:24px; font-weight:800; color:var(--coral); font-family:'Baloo 2',sans-serif; margin-bottom:8px; }
-                                                                                                         .detalle-nombre{ font-size:16px; font-weight:700; margin-bottom:4px; line-height:1.4; }
-                                                                                                         .detalle-categoria{ font-size:12px; color:var(--texto-suave); margin-bottom:12px; }
-                                                                                                         .detalle-descripcion{ font-size:13.5px; color:var(--texto-suave); line-height:1.6; }
+                                                                                                     .aviso-invitado b{ color:var(--coral); text-decoration:underline; cursor:pointer; }
+
+                                                                                                     .seccion-titulo{ font-size:16px; font-weight:800; margin:18px 16px 10px; }
+
+                                                                                                     /* =========================================================
+                                                                                                        GRILLA DE PRODUCTOS — estilo mosaico (como Temu),
+                                                                                                           cada tarjeta ocupa su altura real según la imagen.
+                                                                                                           ========================================================= */
+                                                                                                           .grid-productos{ column-count:2; column-gap:10px; padding:0 16px; }
+                                                                                                           .tarjeta-producto{
+                                                                                                             background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 4px 16px rgba(75,46,131,0.08);
+                                                                                                               break-inside:avoid; margin-bottom:10px; display:block;
+                                                                                                               }
+                                                                                                               .imagen-wrap{ width:100%; background:var(--linea); overflow:hidden; }
+                                                                                                               .imagen-wrap img{ width:100%; height:auto; display:block; }
+                                                                                                               .info-producto{ padding:9px 10px 11px; display:flex; flex-direction:column; gap:4px; }
+                                                                                                               .nombre-producto{
+                                                                                                                 font-size:12.5px; font-weight:600; line-height:1.3; color:var(--texto);
+                                                                                                                   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+                                                                                                                   }
+                                                                                                                   .fila-precio-boton{ display:flex; align-items:center; justify-content:space-between; gap:6px; }
+                                                                                                                   .precio-producto{ font-size:16px; font-weight:800; color:var(--coral); font-family:'Baloo 2',sans-serif; }
+                                                                                                                   .categoria-producto{ font-size:10.5px; color:var(--texto-suave); }
+                                                                                                                   .boton-agregar-mini{
+                                                                                                                     width:24px; height:24px; border-radius:50%; background:var(--morado); color:#fff;
+                                                                                                                       border:none; font-size:15px; font-weight:700; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+                                                                                                                       }
+
+                                                                                                                       .vacio{ text-align:center; padding:60px 20px; color:var(--texto-suave); }
+                                                                                                                       .cargando{ display:flex; align-items:center; justify-content:center; padding:60px 0; color:var(--texto-suave); font-size:13px; }
+                                                                                                                       .spinner{ width:22px; height:22px; border:3px solid var(--linea); border-top-color:var(--coral); border-radius:50%; animation:girar .7s linear infinite; margin-right:8px; }
+                                                                                                                       @keyframes girar{ to{ transform:rotate(360deg); } }
+
+                                                                                                                       /* =========================================================
+                                                                                                                          NAVEGACIÓN INFERIOR
+                                                                                                                          ========================================================= */
+                                                                                                                          .nav-inferior{
+                                                                                                                            position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:520px;
+                                                                                                                              background:#fff; border-top:1px solid var(--linea); display:flex; z-index:40;
+                                                                                                                                padding:8px 0 max(8px, env(safe-area-inset-bottom)); box-shadow:0 -4px 16px rgba(0,0,0,0.05);
+                                                                                                                                }
+                                                                                                                                .nav-item{ flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; border:none; background:none; color:var(--texto-suave); font-size:10.5px; font-weight:600; padding:4px 0; }
+                                                                                                                                .nav-item.activo{ color:var(--coral); }
+                                                                                                                                .nav-item svg{ width:22px; height:22px; }
+
+                                                                                                                                /* =========================================================
+                                                                                                                                   PERFIL
+                                                                                                                                   ========================================================= */
+                                                                                                                                   .perfil-header{
+                                                                                                                                     background:linear-gradient(135deg, var(--morado) 0%, var(--morado-oscuro) 100%); color:#fff;
+                                                                                                                                       padding:28px 20px; border-radius:0 0 22px 22px; display:flex; align-items:center; gap:14px;
+                                                                                                                                       }
+                                                                                                                                       .perfil-avatar{
+                                                                                                                                         width:56px; height:56px; border-radius:50%; background:var(--amarillo); color:var(--morado-oscuro);
+                                                                                                                                           display:flex; align-items:center; justify-content:center; font-weight:800; font-size:22px; flex-shrink:0;
+                                                                                                                                           }
+                                                                                                                                           .perfil-nombre{ font-weight:800; font-size:16px; }
+                                                                                                                                           .perfil-email{ font-size:12px; color:rgba(255,255,255,0.7); }
+                                                                                                                                           .perfil-lista{ padding:18px 16px; }
+                                                                                                                                           .titulo-bloque{ font-size:15px; font-weight:800; margin-bottom:4px; }
+                                                                                                                                           .ayuda-bloque{ font-size:12px; color:var(--texto-suave); margin:0 0 14px; }
+                                                                                                                                           .perfil-item{
+                                                                                                                                             display:flex; align-items:center; justify-content:space-between; padding:14px 4px;
+                                                                                                                                               border-bottom:1px solid var(--linea); font-size:14px; font-weight:600; cursor:pointer;
+                                                                                                                                               }
+                                                                                                                                               .perfil-item .flecha{ color:var(--texto-suave); }
+
+                                                                                                                                               /* =========================================================
+                                                                                                                                                  OVERLAY / HOJA
+                                                                                                                                                  ========================================================= */
+                                                                                                                                                  .overlay{
+                                                                                                                                                    display:none; position:fixed; inset:0; background:rgba(26,21,35,0.5); z-index:50;
+                                                                                                                                                      align-items:flex-end; justify-content:center;
+                                                                                                                                                      }
+                                                                                                                                                      .overlay.visible{ display:flex; }
+                                                                                                                                                      .hoja{
+                                                                                                                                                        background:#fff; width:100%; max-width:520px; border-radius:22px 22px 0 0; max-height:92vh; overflow-y:auto;
+                                                                                                                                                          animation:subir .25s ease-out;
+                                                                                                                                                          }
+                                                                                                                                                          @keyframes subir{ from{ transform:translateY(100%); } to{ transform:translateY(0); } }
+                                                                                                                                                          .hoja-header{
+                                                                                                                                                            display:flex; align-items:center; justify-content:space-between; padding:16px 18px;
+                                                                                                                                                              border-bottom:1px solid var(--linea); position:sticky; top:0; background:#fff; z-index:2;
+                                                                                                                                                              }
+                                                                                                                                                              .hoja-header h3{ margin:0; font-size:17px; }
+                                                                                                                                                              .cerrar-btn{
+                                                                                                                                                                width:30px; height:30px; border-radius:50%; background:var(--crema); border:none;
+                                                                                                                                                                  display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--texto-suave);
+                                                                                                                                                                  }
+
+                                                                                                                                                                  /* =========================================================
+                                                                                                                                                                     DETALLE DE PRODUCTO — video corto + galería de fotos
+                                                                                                                                                                     ========================================================= */
+                                                                                                                                                                     .galeria-wrap{ position:relative; }
+                                                                                                                                                                     .video-producto-wrap{ position:relative; width:100%; aspect-ratio:1/1; background:#000; }
+                                                                                                                                                                     .video-producto{ width:100%; height:100%; object-fit:cover; }
+                                                                                                                                                                     .etiqueta-video{
+                                                                                                                                                                       position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.6); color:#fff;
+                                                                                                                                                                         font-size:11px; font-weight:700; padding:4px 10px; border-radius:999px;
+                                                                                                                                                                         }
+                                                                                                                                                                         .galeria-imagenes{
+                                                                                                                                                                           display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none;
+                                                                                                                                                                           }
+                                                                                                                                                                           .galeria-imagenes::-webkit-scrollbar{ display:none; }
+                                                                                                                                                                           .galeria-imagenes img{
+                                                                                                                                                                             width:100%; flex-shrink:0; scroll-snap-align:start; aspect-ratio:1/1; object-fit:cover; background:var(--linea);
+                                                                                                                                                                             }
+                                                                                                                                                                             .galeria-puntos{ display:flex; justify-content:center; gap:6px; padding:10px 0; }
+                                                                                                                                                                             .galeria-puntos span{ width:6px; height:6px; border-radius:50%; background:var(--linea); }
+                                                                                                                                                                             .galeria-puntos span.activo{ background:var(--coral); }
+
+                                                                                                                                                                             .detalle-body{ padding:16px 18px 28px; }
+                                                                                                                                                                             .detalle-precio{ font-size:24px; font-weight:800; color:var(--coral); font-family:'Baloo 2',sans-serif; margin-bottom:8px; }
+                                                                                                                                                                             .detalle-nombre{ font-size:16px; font-weight:700; margin-bottom:4px; line-height:1.4; }
+                                                                                                                                                                             .detalle-categoria{ font-size:12px; color:var(--texto-suave); margin-bottom:12px; }
+                                                                                                                                                                             .detalle-descripcion{ font-size:13.5px; color:var(--texto-suave); line-height:1.6; }
+
+                                                                                                                                                                             .fila-relacionados{ display:flex; gap:10px; overflow-x:auto; padding:4px 0 8px; scrollbar-width:none; }
+                                                                                                                                                                             .fila-relacionados::-webkit-scrollbar{ display:none; }
+                                                                                                                                                                             .tarjeta-relacionada{ flex-shrink:0; width:120px; cursor:pointer; }
+                                                                                                                                                                             .tarjeta-relacionada img{ width:120px; height:120px; border-radius:12px; object-fit:cover; background:var(--linea); }
+                                                                                                                                                                             .tarjeta-relacionada .nombre-rel{ font-size:11.5px; font-weight:600; margin-top:6px; line-height:1.3; max-height:2.6em; overflow:hidden; }
+                                                                                                                                                                             .tarjeta-relacionada .precio-rel{ font-size:13px; font-weight:800; color:var(--coral); }
+
+                                                                                                                                                                             /* =========================================================
+                                                                                                                                                                                CARRITO
+                                                                                                                                                                                ========================================================= */
+                                                                                                                                                                                .item-carrito{ display:flex; gap:12px; padding:14px 18px; border-bottom:1px solid var(--linea); }
+                                                                                                                                                                                .item-carrito img{ width:64px; height:64px; border-radius:10px; object-fit:cover; flex-shrink:0; background:var(--linea); }
+                                                                                                                                                                                .item-carrito-info{ flex:1; min-width:0; }
+                                                                                                                                                                                .item-carrito-nombre{ font-size:13px; font-weight:600; line-height:1.35; margin-bottom:6px; }
+                                                                                                                                                                                .item-carrito-fila{ display:flex; align-items:center; justify-content:space-between; }
+                                                                                                                                                                                .item-carrito-precio{ font-weight:800; color:var(--coral); font-size:14px; }
+                                                                                                                                                                                .mini-selector{ display:flex; align-items:center; gap:10px; }
+                                                                                                                                                                                .mini-selector button{ width:24px; height:24px; border-radius:50%; border:1.5px solid var(--linea); background:#fff; font-size:14px; color:var(--morado); }
+                                                                                                                                                                                .quitar-item{ color:var(--texto-suave); font-size:11px; text-decoration:underline; background:none; border:none; margin-top:4px; }
+                                                                                                                                                                                .resumen-carrito{ padding:16px 18px 20px; }
+                                                                                                                                                                                .resumen-fila{ display:flex; justify-content:space-between; font-size:16px; font-weight:800; color:var(--texto); }
+                                                                                                                                                                                .carrito-vacio{ text-align:center; padding:60px 24px; color:var(--texto-suave); }
+                                                                                                                                                                                .carrito-vacio .emoji{ font-size:44px; margin-bottom:10px; }
+                                                                                                                                                                                

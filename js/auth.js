@@ -1,132 +1,180 @@
 /* =========================================================
-   LÓGICA DE LOGIN Y REGISTRO
+   LÓGICA DE LOGIN, REGISTRO E INVITADO
    ========================================================= */
 
    let modoFormulario = "login";
+   let MODO_INVITADO = false;
 
-   function mostrarPantalla(idPantalla){
-     document.querySelectorAll(".pantalla").forEach(p => p.classList.remove("visible"));
-       document.getElementById(idPantalla).classList.add("visible");
-       }
+   /* ---------------------------------------------------------
+      CAMBIAR DE PANTALLA
+      --------------------------------------------------------- */
+      function mostrarPantalla(idPantalla){
+        document.querySelectorAll(".pantalla").forEach(p => p.classList.remove("visible"));
+          document.getElementById(idPantalla).classList.add("visible");
+          }
 
-       function mostrarFormulario(modo){
-         modoFormulario = modo;
-           actualizarTextosFormulario();
-             limpiarFormulario();
-               mostrarPantalla("pantalla-formulario");
-               }
+          /* ---------------------------------------------------------
+             FORMULARIO DE LOGIN / REGISTRO
+             --------------------------------------------------------- */
+             function mostrarFormulario(modo){
+               modoFormulario = modo;
+                 actualizarTextosFormulario();
+                   limpiarFormulario();
+                     mostrarPantalla("pantalla-formulario");
+                     }
 
-               function volverABienvenida(){
-                 mostrarPantalla("pantalla-bienvenida");
-                 }
-
-                 function cambiarModo(){
-                   modoFormulario = (modoFormulario === "login") ? "registro" : "login";
-                     actualizarTextosFormulario();
-                       limpiarFormulario();
+                     function volverABienvenida(){
+                       mostrarPantalla("pantalla-bienvenida");
                        }
 
-                       function actualizarTextosFormulario(){
-                         const esRegistro = modoFormulario === "registro";
-                           document.getElementById("titulo-formulario").textContent = esRegistro ? "Crear cuenta" : "Iniciar sesión";
-                             document.getElementById("boton-enviar").textContent = esRegistro ? "Registrarme" : "Iniciar sesión";
-                               document.getElementById("campo-nombre").style.display = esRegistro ? "block" : "none";
-                                 document.getElementById("campo-telefono").style.display = esRegistro ? "block" : "none";
-                                   document.getElementById("texto-alterno").innerHTML = esRegistro
-                                       ? '¿Ya tenés cuenta? <b onclick="cambiarModo()">Iniciar sesión</b>'
-                                           : '¿No tenés cuenta? <b onclick="cambiarModo()">Registrate</b>';
-                                           }
+                       function cambiarModo(){
+                         modoFormulario = (modoFormulario === "login") ? "registro" : "login";
+                           actualizarTextosFormulario();
+                             limpiarFormulario();
+                             }
 
-                                           function limpiarFormulario(){
-                                             document.getElementById("mensaje-error").classList.remove("visible");
-                                               document.getElementById("input-nombre").value = "";
-                                                 document.getElementById("input-telefono").value = "";
-                                                   document.getElementById("input-email").value = "";
-                                                     document.getElementById("input-password").value = "";
-                                                     }
+                             function actualizarTextosFormulario(){
+                               const esRegistro = modoFormulario === "registro";
 
-                                                     function mostrarError(texto){
-                                                       const el = document.getElementById("mensaje-error");
-                                                         el.textContent = texto;
-                                                           el.classList.add("visible");
-                                                           }
+                                 document.getElementById("titulo-formulario").textContent = esRegistro ? "Crear cuenta" : "Iniciar sesión";
+                                   document.getElementById("boton-enviar").textContent = esRegistro ? "Registrarme" : "Iniciar sesión";
 
-                                                           function traducirError(codigo){
-                                                             const mensajes = {
-                                                                 "auth/invalid-email": "El correo no es válido.",
-                                                                     "auth/user-not-found": "No existe una cuenta con ese correo.",
-                                                                         "auth/wrong-password": "La contraseña es incorrecta.",
-                                                                             "auth/invalid-credential": "Correo o contraseña incorrectos.",
-                                                                                 "auth/email-already-in-use": "Ya existe una cuenta con ese correo.",
-                                                                                     "auth/weak-password": "La contraseña debe tener al menos 6 caracteres.",
-                                                                                         "auth/missing-password": "Ingresá una contraseña."
-                                                                                           };
-                                                                                             return mensajes[codigo] || "Ocurrió un error. Intentá de nuevo.";
-                                                                                             }
+                                     document.getElementById("campo-nombre").style.display = esRegistro ? "block" : "none";
+                                       document.getElementById("campo-telefono").style.display = esRegistro ? "block" : "none";
+                                         document.getElementById("fila-aceptar-terminos").style.display = esRegistro ? "flex" : "none";
 
-                                                                                             function enviarFormulario(){
-                                                                                               const email = document.getElementById("input-email").value.trim();
-                                                                                                 const password = document.getElementById("input-password").value;
-                                                                                                   const boton = document.getElementById("boton-enviar");
-                                                                                                     document.getElementById("mensaje-error").classList.remove("visible");
+                                           document.getElementById("texto-alterno").innerHTML = esRegistro
+                                               ? '¿Ya tenés cuenta? <b onclick="cambiarModo()">Iniciar sesión</b>'
+                                                   : '¿No tenés cuenta? <b onclick="cambiarModo()">Registrate</b>';
+                                                   }
 
-                                                                                                       if(!email || !password){
-                                                                                                           mostrarError("Completá correo y contraseña.");
-                                                                                                               return;
-                                                                                                                 }
+                                                   function limpiarFormulario(){
+                                                     document.getElementById("mensaje-error").classList.remove("visible");
+                                                       document.getElementById("input-nombre").value = "";
+                                                         document.getElementById("input-telefono").value = "";
+                                                           document.getElementById("input-email").value = "";
+                                                             document.getElementById("input-password").value = "";
+                                                               document.getElementById("check-terminos").checked = false;
+                                                               }
 
-                                                                                                                   if(modoFormulario === "login"){
-                                                                                                                       boton.disabled = true;
-                                                                                                                           boton.textContent = "Ingresando...";
-                                                                                                                               auth.signInWithEmailAndPassword(email, password)
-                                                                                                                                     .catch(error => mostrarError(traducirError(error.code)))
-                                                                                                                                           .finally(() => {
-                                                                                                                                                   boton.disabled = false;
-                                                                                                                                                           boton.textContent = "Iniciar sesión";
-                                                                                                                                                                 });
-                                                                                                                                                                   } else {
-                                                                                                                                                                       const nombre = document.getElementById("input-nombre").value.trim();
-                                                                                                                                                                           const telefono = document.getElementById("input-telefono").value.trim();
-                                                                                                                                                                               if(!nombre){
-                                                                                                                                                                                     mostrarError("Ingresá tu nombre completo.");
-                                                                                                                                                                                           return;
-                                                                                                                                                                                               }
-                                                                                                                                                                                                   boton.disabled = true;
-                                                                                                                                                                                                       boton.textContent = "Creando cuenta...";
-                                                                                                                                                                                                           auth.createUserWithEmailAndPassword(email, password)
-                                                                                                                                                                                                                 .then(credencial => {
-                                                                                                                                                                                                                         return db.ref("usuarios/" + credencial.user.uid).set({
-                                                                                                                                                                                                                                   nombre: nombre,
-                                                                                                                                                                                                                                             telefono: telefono,
-                                                                                                                                                                                                                                                       email: email,
-                                                                                                                                                                                                                                                                 creado: Date.now()
-                                                                                                                                                                                                                                                                         });
-                                                                                                                                                                                                                                                                               })
-                                                                                                                                                                                                                                                                                     .catch(error => mostrarError(traducirError(error.code)))
-                                                                                                                                                                                                                                                                                           .finally(() => {
-                                                                                                                                                                                                                                                                                                   boton.disabled = false;
-                                                                                                                                                                                                                                                                                                           boton.textContent = "Registrarme";
-                                                                                                                                                                                                                                                                                                                 });
-                                                                                                                                                                                                                                                                                                                   }
-                                                                                                                                                                                                                                                                                                                   }
+                                                               function mostrarError(texto){
+                                                                 const el = document.getElementById("mensaje-error");
+                                                                   el.textContent = texto;
+                                                                     el.classList.add("visible");
+                                                                     }
 
-                                                                                                                                                                                                                                                                                                                   function cerrarSesionUsuario(){
-                                                                                                                                                                                                                                                                                                                     auth.signOut();
-                                                                                                                                                                                                                                                                                                                     }
+                                                                     function traducirError(codigo){
+                                                                       const mensajes = {
+                                                                           "auth/invalid-email": "El correo no es válido.",
+                                                                               "auth/user-not-found": "No existe una cuenta con ese correo.",
+                                                                                   "auth/wrong-password": "La contraseña es incorrecta.",
+                                                                                       "auth/invalid-credential": "Correo o contraseña incorrectos.",
+                                                                                           "auth/email-already-in-use": "Ya existe una cuenta con ese correo.",
+                                                                                               "auth/weak-password": "La contraseña debe tener al menos 6 caracteres.",
+                                                                                                   "auth/missing-password": "Ingresá una contraseña."
+                                                                                                     };
+                                                                                                       return mensajes[codigo] || "Ocurrió un error. Intentá de nuevo.";
+                                                                                                       }
 
-                                                                                                                                                                                                                                                                                                                     /* ---------------------------------------------------------
-                                                                                                                                                                                                                                                                                                                        FIREBASE NOS AVISA SOLO cuando alguien inicia o cierra
-                                                                                                                                                                                                                                                                                                                           sesión.
-                                                                                                                                                                                                                                                                                                                              - Si hay usuario logueado: mostramos el catálogo y
-                                                                                                                                                                                                                                                                                                                                   cargamos los productos.
-                                                                                                                                                                                                                                                                                                                                      - Si no hay nadie logueado: mostramos la bienvenida.
-                                                                                                                                                                                                                                                                                                                                      --------------------------------------------------------- */
-                                                                                                                                                                                                                                                                                                                                      auth.onAuthStateChanged(usuario => {
-                                                                                                                                                                                                                                                                                                                                        if(usuario){
-                                                                                                                                                                                                                                                                                                                                            mostrarPantalla("pantalla-catalogo");
-                                                                                                                                                                                                                                                                                                                                                cargarProductos();
-                                                                                                                                                                                                                                                                                                                                                  } else {
-                                                                                                                                                                                                                                                                                                                                                      mostrarPantalla("pantalla-bienvenida");
-                                                                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                                                                        });
-                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                       function enviarFormulario(){
+                                                                                                         const email = document.getElementById("input-email").value.trim();
+                                                                                                           const password = document.getElementById("input-password").value;
+                                                                                                             const boton = document.getElementById("boton-enviar");
+
+                                                                                                               document.getElementById("mensaje-error").classList.remove("visible");
+
+                                                                                                                 if(!email || !password){
+                                                                                                                     mostrarError("Completá correo y contraseña.");
+                                                                                                                         return;
+                                                                                                                           }
+
+                                                                                                                             if(modoFormulario === "login"){
+                                                                                                                                 boton.disabled = true;
+                                                                                                                                     boton.textContent = "Ingresando...";
+
+                                                                                                                                         auth.signInWithEmailAndPassword(email, password)
+                                                                                                                                               .then(() => { MODO_INVITADO = false; })
+                                                                                                                                                     .catch(error => mostrarError(traducirError(error.code)))
+                                                                                                                                                           .finally(() => {
+                                                                                                                                                                   boton.disabled = false;
+                                                                                                                                                                           boton.textContent = "Iniciar sesión";
+                                                                                                                                                                                 });
+
+                                                                                                                                                                                   } else {
+                                                                                                                                                                                       const nombre = document.getElementById("input-nombre").value.trim();
+                                                                                                                                                                                           const telefono = document.getElementById("input-telefono").value.trim();
+                                                                                                                                                                                               const aceptoTerminos = document.getElementById("check-terminos").checked;
+
+                                                                                                                                                                                                   if(!nombre){
+                                                                                                                                                                                                         mostrarError("Ingresá tu nombre completo.");
+                                                                                                                                                                                                               return;
+                                                                                                                                                                                                                   }
+                                                                                                                                                                                                                       if(!aceptoTerminos){
+                                                                                                                                                                                                                             mostrarError("Tenés que aceptar los Términos y Condiciones para crear tu cuenta.");
+                                                                                                                                                                                                                                   return;
+                                                                                                                                                                                                                                       }
+
+                                                                                                                                                                                                                                           boton.disabled = true;
+                                                                                                                                                                                                                                               boton.textContent = "Creando cuenta...";
+
+                                                                                                                                                                                                                                                   auth.createUserWithEmailAndPassword(email, password)
+                                                                                                                                                                                                                                                         .then(credencial => {
+                                                                                                                                                                                                                                                                 MODO_INVITADO = false;
+                                                                                                                                                                                                                                                                         // Guardamos los datos básicos. La dirección, ciudad y
+                                                                                                                                                                                                                                                                                 // demás se completan más adelante en el Perfil.
+                                                                                                                                                                                                                                                                                         return db.ref("usuarios/" + credencial.user.uid).set({
+                                                                                                                                                                                                                                                                                                   nombre: nombre,
+                                                                                                                                                                                                                                                                                                             telefono: telefono,
+                                                                                                                                                                                                                                                                                                                       email: email,
+                                                                                                                                                                                                                                                                                                                                 direccion: "",
+                                                                                                                                                                                                                                                                                                                                           ciudad: "",
+                                                                                                                                                                                                                                                                                                                                                     referencia: "",
+                                                                                                                                                                                                                                                                                                                                                               creado: Date.now()
+                                                                                                                                                                                                                                                                                                                                                                       });
+                                                                                                                                                                                                                                                                                                                                                                             })
+                                                                                                                                                                                                                                                                                                                                                                                   .catch(error => mostrarError(traducirError(error.code)))
+                                                                                                                                                                                                                                                                                                                                                                                         .finally(() => {
+                                                                                                                                                                                                                                                                                                                                                                                                 boton.disabled = false;
+                                                                                                                                                                                                                                                                                                                                                                                                         boton.textContent = "Registrarme";
+                                                                                                                                                                                                                                                                                                                                                                                                               });
+                                                                                                                                                                                                                                                                                                                                                                                                                 }
+                                                                                                                                                                                                                                                                                                                                                                                                                 }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                 /* ---------------------------------------------------------
+                                                                                                                                                                                                                                                                                                                                                                                                                    ENTRAR COMO INVITADO
+                                                                                                                                                                                                                                                                                                                                                                                                                       No usa Firebase Auth: simplemente marcamos una bandera
+                                                                                                                                                                                                                                                                                                                                                                                                                          y mostramos el catálogo, con un aviso para que se
+                                                                                                                                                                                                                                                                                                                                                                                                                             registre si quiere comprar.
+                                                                                                                                                                                                                                                                                                                                                                                                                             --------------------------------------------------------- */
+                                                                                                                                                                                                                                                                                                                                                                                                                             function entrarComoInvitado(){
+                                                                                                                                                                                                                                                                                                                                                                                                                               MODO_INVITADO = true;
+                                                                                                                                                                                                                                                                                                                                                                                                                                 mostrarPantalla("pantalla-catalogo");
+                                                                                                                                                                                                                                                                                                                                                                                                                                   document.getElementById("aviso-invitado").style.display = "block";
+                                                                                                                                                                                                                                                                                                                                                                                                                                     cargarProductos();
+                                                                                                                                                                                                                                                                                                                                                                                                                                       actualizarBadgeCarrito();
+                                                                                                                                                                                                                                                                                                                                                                                                                                       }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                       /* ---------------------------------------------------------
+                                                                                                                                                                                                                                                                                                                                                                                                                                          CERRAR SESIÓN
+                                                                                                                                                                                                                                                                                                                                                                                                                                          --------------------------------------------------------- */
+                                                                                                                                                                                                                                                                                                                                                                                                                                          function cerrarSesionUsuario(){
+                                                                                                                                                                                                                                                                                                                                                                                                                                            MODO_INVITADO = false;
+                                                                                                                                                                                                                                                                                                                                                                                                                                              auth.signOut();
+                                                                                                                                                                                                                                                                                                                                                                                                                                              }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                              /* ---------------------------------------------------------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 FIREBASE NOS AVISA SOLO cuando alguien inicia o cierra
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    sesión.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    --------------------------------------------------------- */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    auth.onAuthStateChanged(usuario => {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                      if(usuario){
+                                                                                                                                                                                                                                                                                                                                                                                                                                                          MODO_INVITADO = false;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                              mostrarPantalla("pantalla-catalogo");
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                  document.getElementById("aviso-invitado").style.display = "none";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                      cargarProductos();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                          actualizarBadgeCarrito();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } else if(!MODO_INVITADO){
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                mostrarPantalla("pantalla-bienvenida");
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  });
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
